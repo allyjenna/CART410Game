@@ -8,6 +8,7 @@ TagManager:
   - Area3
   - Area2
   - Area1
+  - Flag
   layers:
   - Default
   - TransparentFX
