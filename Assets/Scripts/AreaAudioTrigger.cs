@@ -22,6 +22,9 @@ public class AreaAudioTrigger : MonoBehaviour
     {
         // Get the AudioSource component attached to this GameObject
         audioSource = GetComponent<AudioSource>();
+        //ChangeAudioVolume();
+        //ChangeAudioSpeed();
+        ChangeAudioSpatialization();
         if (audioSource == null)
         {
             Debug.LogError("No AudioSource component found. Attach an AudioSource to this GameObject.");
@@ -72,5 +75,21 @@ public class AreaAudioTrigger : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
         }
+    }
+
+
+    private void ChangeAudioVolume()
+    {
+        audioSource.volume = 0.05f;
+    }
+
+    private void ChangeAudioSpeed()
+    {
+        audioSource.pitch = 2f;
+    }
+
+    private void ChangeAudioSpatialization()
+    {
+        audioSource.panStereo = 1f;
     }
 }
