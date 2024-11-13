@@ -3,6 +3,7 @@ using UnityEngine;
 public class AreaAudioTrigger : MonoBehaviour
 {
     // Assign the audio clips for each area in the Inspector
+    public AudioClip baseSong;
     public AudioClip song1;
     public AudioClip song2;
     public AudioClip song3;
@@ -22,13 +23,11 @@ public class AreaAudioTrigger : MonoBehaviour
     {
         // Get the AudioSource component attached to this GameObject
         audioSource = GetComponent<AudioSource>();
-        //ChangeAudioVolume();
-        //ChangeAudioSpeed();
-        ChangeAudioSpatialization();
         if (audioSource == null)
         {
             Debug.LogError("No AudioSource component found. Attach an AudioSource to this GameObject.");
         }
+        PlaySong(baseSong);
     }
 
     private void OnTriggerEnter(Collider other)
