@@ -12,56 +12,59 @@ public class lookingAtSlender : MonoBehaviour
     public bool looking; //looking at slender
     public float audioLouder, audioLower;
     public AudioSource staticAudio;
+    public Slider healthBar; // Add a public Slider for health bar
     int someInt = 30;
     public raycastSlender detetedScript;
-
 
     void Start()
     {
         color.a = 0f;
         hp = 1000f;
 
+        // Set the slider’s max value to match the initial health value
+        healthBar.maxValue = hp;
+        healthBar.value = hp;
     }
+
     void OnBecameVisible()
     {
         looking = true;
     }
-    
+
     void OnBecameInvisible()
     {
         looking = false;
     }
+
     void FixedUpdate()
     {
         staticImage.color = color;
-    if(detetedScript.detected == true)
-    {
-         if (looking == true)
-        {
-            color.a = color.a + drain * Time.deltaTime;
-            hp = hp - hpDmg * Time.deltaTime;
-            staticAudio.volume = staticAudio.volume + audioLouder * Time.deltaTime;
-        }
-    }
-     
 
-        if (looking == false || detetedScript.detected == false)
+        if (detetedScript.detected)
         {
-            color.a = color.a - recharge * Time.deltaTime;
-            staticAudio.volume = staticAudio.volume - audioLower * Time.deltaTime;
+            if (looking)
+            {
+                color.a += drain * Time.deltaTime;
+                hp -= hpDmg * Time.deltaTime;
+                staticAudio.volume += audioLouder * Time.deltaTime;
+            }
         }
-        if(hp < 1)
+
+        if (!looking || !detetedScript.detected)
+        {
+            color.a -= recharge * Time.deltaTime;
+            staticAudio.volume -= audioLower * Time.deltaTime;
+        }
+
+        // Update the health bar value
+        healthBar.value = hp;
+
+        // Check if health is below 1
+        if (hp < 1)
         {
             SceneManager.LoadScene("menu");
-             Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
-
-    void OnGUI(){
-        GUI.skin.label.fontSize = someInt;
-        GUI.Label (new Rect (400, 0, 500, 100), "Health :" + hp + "/1000");
-    
-    }
-
 }
