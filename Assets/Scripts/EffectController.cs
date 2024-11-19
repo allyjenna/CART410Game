@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using System.Collections.Generic;
+
 
 public class EffectController : MonoBehaviour
 {
@@ -93,4 +95,27 @@ public class EffectController : MonoBehaviour
             Debug.Log($"Auto Exposure - Min: {minExposure}, Max: {maxExposure}");
         }
     }
+
+    public List<string> GetActiveEffects()
+    {
+        List<string> activeEffects = new List<string>();
+
+        if (chromaticAberration != null && chromaticAberration.intensity.value > 0.5f)
+            activeEffects.Add("Chromatic Aberration");
+
+        if (bloom != null && bloom.intensity.value > 5f)
+            activeEffects.Add("Bloom");
+
+        if (colorGrading != null && (colorGrading.saturation.value < 0 || colorGrading.contrast.value != 0))
+            activeEffects.Add("Color Grading");
+
+        if (lensDistortion != null && lensDistortion.intensity.value != 0)
+            activeEffects.Add("Lens Distortion");
+
+        if (autoExposure != null && autoExposure.minLuminance.value < 0)
+            activeEffects.Add("Auto Exposure");
+
+        return activeEffects;
+    }
+
 }

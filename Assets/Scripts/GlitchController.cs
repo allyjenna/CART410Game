@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+
 
 public class GlitchController : MonoBehaviour
 {
@@ -70,7 +72,7 @@ public class GlitchController : MonoBehaviour
             float intensityModifier = activeEffectsCount == 2 ? 0.5f : 1f; // Scale down intensity if two effects are active
             float glitchAmount = Mathf.Lerp(0f, maxGlitchAmount * intensityModifier, Mathf.Sin(glitchOscillationTime) * 0.5f + 0.5f);
             cameraGlitchEffect.glitchAmount = glitchAmount;
-            Debug.Log($"Camera Glitch Amount: {glitchAmount}");
+            //Debug.Log($"Camera Glitch Amount: {glitchAmount}");
         }
     }
 
@@ -90,7 +92,7 @@ public class GlitchController : MonoBehaviour
             int pixelSize = Mathf.RoundToInt(Mathf.Lerp(minPixelSize, maxPixelSize, Mathf.Sin(pixelationOscillationTime) * 0.5f + 0.5f));
             cameraPixelationEffect.pixelSize = pixelSize;
 
-            Debug.Log($"Pixelation Size: {pixelSize}");
+            //Debug.Log($"Pixelation Size: {pixelSize}");
         }
     }
 
@@ -111,7 +113,7 @@ public class GlitchController : MonoBehaviour
             float intensityModifier = activeEffectsCount == 2 ? 0.5f : 1f; // Scale down intensity if two effects are active
             float intensity = Mathf.Lerp(0f, maxDigitalIntensity * intensityModifier, Mathf.Sin(digitalGlitchOscillationTime) * 0.5f + 0.5f);
             digitalGlitchEffect.intensity = intensity;
-            Debug.Log($"Digital Glitch Intensity: {intensity}");
+            //Debug.Log($"Digital Glitch Intensity: {intensity}");
         }
     }
 
@@ -138,7 +140,7 @@ public class GlitchController : MonoBehaviour
             analogGlitchEffect.horizontalShake = horizontalShake;
             analogGlitchEffect.colorDrift = colorDrift;
 
-            Debug.Log($"Analog Glitch - ScanLine: {scanLineJitter}, VerticalJump: {verticalJump}, HorizontalShake: {horizontalShake}, ColorDrift: {colorDrift}");
+            //Debug.Log($"Analog Glitch - ScanLine: {scanLineJitter}, VerticalJump: {verticalJump}, HorizontalShake: {horizontalShake}, ColorDrift: {colorDrift}");
         }
     }
 
@@ -194,4 +196,24 @@ public class GlitchController : MonoBehaviour
 
         return activeEffectsString.TrimEnd(',', ' ');
     }
+
+    public List<string> GetActiveGlitches()
+    {
+        List<string> activeGlitches = new List<string>();
+
+        if (cameraGlitchEffect != null && cameraGlitchEffect.glitchAmount > 0)
+            activeGlitches.Add("Camera Glitch");
+
+        if (cameraPixelationEffect != null && cameraPixelationEffect.pixelSize < disabledPixelSize)
+            activeGlitches.Add("Pixelation");
+
+        if (digitalGlitchEffect != null && digitalGlitchEffect.intensity > 0)
+            activeGlitches.Add("Digital Glitch");
+
+        if (analogGlitchEffect != null && (analogGlitchEffect.scanLineJitter > 0 || analogGlitchEffect.colorDrift > 0))
+            activeGlitches.Add("Analog Glitch");
+
+        return activeGlitches;
+    }
+
 }

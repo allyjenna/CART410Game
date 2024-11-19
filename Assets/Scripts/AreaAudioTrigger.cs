@@ -4,9 +4,9 @@ public class AreaAudioTrigger : MonoBehaviour
 {
     // Assign the audio clips for each area in the Inspector
     public AudioClip baseSong;
-    public AudioClip song1;
-    public AudioClip song2;
-    public AudioClip song3;
+    public AudioClip song1_Reverb;
+    public AudioClip song2_Slow;
+    public AudioClip song3_Backwards;
 
     private AudioSource audioSource;
 
@@ -39,13 +39,13 @@ public class AreaAudioTrigger : MonoBehaviour
         switch (area)
         {
             case Area.Area1:
-                PlaySong(song1);
+                PlaySong(song1_Reverb);
                 break;
             case Area.Area2:
-                PlaySong(song2);
+                PlaySong(song2_Slow);
                 break;
             case Area.Area3:
-                PlaySong(song3);
+                PlaySong(song3_Backwards);
                 break;
         }
     }
@@ -91,4 +91,17 @@ public class AreaAudioTrigger : MonoBehaviour
     {
         audioSource.panStereo = 1f;
     }
+
+    public string GetCurrentPlayingSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            if (audioSource.clip == song1_Reverb) return "Reverbed Music";
+            if (audioSource.clip == song2_Slow) return "Slowed Music";
+            if (audioSource.clip == song3_Backwards) return "Backwards Music";
+        }
+
+        return null; // No sound is currently playing
+    }
+
 }
