@@ -27,6 +27,9 @@ public class AreaAudioTrigger : MonoBehaviour
         {
             Debug.LogError("No AudioSource component found. Attach an AudioSource to this GameObject.");
         }
+        PlaySong(song1_Reverb);
+        PlaySong(song2_Slow);
+        PlaySong(song3_Backwards);
         PlaySong(baseSong);
     }
 
