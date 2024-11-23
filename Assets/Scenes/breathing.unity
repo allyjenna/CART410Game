@@ -671,7 +671,7 @@ MonoBehaviour:
   - {fileID: 914798301}
   - {fileID: 1061040584}
   - {fileID: 596713039}
-  inhaleScale: 2
+  inhaleScale: 2.2
   exhaleScale: 1.5
   duration: 5
   delayBetweenCircles: 0.5
