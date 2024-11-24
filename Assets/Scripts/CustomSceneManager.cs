@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class CustomSceneManager : MonoBehaviour
 {
-    private float calibrationDuration = 10f; // Duration for calibration scenes
+    private float calibrationDuration = 20f; // Duration for calibration scenes
     private bool isCalibrationActive = false; // Flag to check if calibration is running
     private float calibrationTimer = 0f;
 
