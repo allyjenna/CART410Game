@@ -1,20 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI; // For Legacy Text component
+using TMPro;
 
 public class BreathingCircles : MonoBehaviour
 {
     public RectTransform[] circles; // Array of breathing circles
-    public Text breathingText; // For Legacy Text
+    //public Text breathingText; // For Legacy Text
+    public TMP_Text breathingText;
     public float inhaleDuration = 2f;
     public float exhaleDuration = 2f;
-    private float timer = 0f;
+    private float timer = 1f;
     private bool isInhaling = true;
 
     void Start()
     {
         // Set the initial text to "Inhale"
         if (breathingText != null)
-            breathingText.text = "Inhale";
+            breathingText.SetText("Inhale");
     }
 
     void Update()
@@ -38,7 +40,7 @@ public class BreathingCircles : MonoBehaviour
 
                 // Change the text to "Exhale"
                 if (breathingText != null)
-                    breathingText.text = "Exhale";
+                    breathingText.SetText("Exhale");
             }
         }
         else
@@ -58,7 +60,7 @@ public class BreathingCircles : MonoBehaviour
 
                 // Change the text to "Inhale"
                 if (breathingText != null)
-                    breathingText.text = "Inhale";
+                    breathingText.SetText("Inhale");
             }
         }
     }
