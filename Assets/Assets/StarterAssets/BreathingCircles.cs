@@ -9,7 +9,7 @@ public class BreathingCircles : MonoBehaviour
     public TMP_Text breathingText;
     public float inhaleDuration = 2f;
     public float exhaleDuration = 2f;
-    private float timer = 1f;
+    private float timer = 0f;
     private bool isInhaling = true;
 
     void Start()
